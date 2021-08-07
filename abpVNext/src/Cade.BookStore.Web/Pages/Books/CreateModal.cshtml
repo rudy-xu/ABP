@@ -1,0 +1,24 @@
+﻿@page
+@using Cade.BookStore.Localization
+@using Cade.BookStore.Web.Pages.Books
+@using Microsoft.Extensions.Localization
+@using Volo.Abp.AspNetCore.Mvc.UI.Bootstrap.TagHelpers.Modal
+
+@*//specify the type of model passed to a view or page*@
+@model CreateModalModel
+@inject IStringLocalizer<BookStoreResource> LocalBookSR
+@{
+    Layout = null;
+}
+
+<abp-dynamic-form abp-model="CUBookDto" asp-page="/Books/CreateModal">
+    <abp-modal>
+        <abp-modal-header title="@LocalBookSR["NewBook"].Value"></abp-modal-header>
+
+        <abp-modal-body>
+            <abp-form-content />
+        </abp-modal-body>
+
+        <abp-modal-footer buttons="@(AbpModalButtons.Cancel|AbpModalButtons.Save)"></abp-modal-footer>
+    </abp-modal>
+</abp-dynamic-form>

@@ -1,0 +1,19 @@
+version: "3.8"
+services:
+  sqlServer:
+    # container_name: sqlServer  # not supported
+    image: mcr.microsoft.com/mssql/server:2019-latest
+    ports:
+      - "1433:1433"
+    volumes: 
+      - ./workdir/data:/var/opt/mssql/data:rw
+      - ./workdir/log:/var/opt/mssql/log:rw
+      - ./config/cong:/var/opt/mssql/secrets
+    environment:
+      SA_PASSWORD: "sql@123456"   # password must be like xxx@xxx
+      ACCEPT_EULA: "Y"
+    deploy:
+      mode: global
+      placement:
+        constraints:
+          - node.role == manager
